@@ -12,12 +12,12 @@ import {  Collapse,
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    Button } from 'reactstrap';
+     } from 'reactstrap';
 
-    export default class Mybutton extends React.Component {
+    export default class MyNav extends React.Component {
     constructor(props) {
         super(props);
-    
+
         this.toggle = this.toggle.bind(this);
         this.state = {
           isOpen: false
@@ -37,7 +37,7 @@ render(){
         <DropdownToggle nav caret>
           All Campaigns
         </DropdownToggle>
-        <DropdownMenu left>
+        <DropdownMenu>
           <DropdownItem>
             Option 1
           </DropdownItem>
@@ -50,14 +50,14 @@ render(){
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
-        </Nav>  
+        </Nav>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
             <FontAwesomeIcon icon="search" size="lg" fixedWidth/>
             </NavItem>
-            
+
             <NavItem>
                 <NavLink href="/components/">Components</NavLink>
               </NavItem>
@@ -68,9 +68,11 @@ render(){
             </Nav>
           </Collapse>
         </Navbar>
+{/*
         <Button color="danger" size="large">Danger!</Button>
+*/}
         </div>
-    
+
   );
 }
 };
