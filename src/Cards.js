@@ -3,15 +3,12 @@ import {  CardGroup} from 'reactstrap';
 import DisplayCard from './DisplayCard';
 import CardsJson from './json/cards';
 
-    export default class MyCard extends React.Component {
-
-
-
+export default class MyCard extends React.Component {
 
 render(){
   return (
     <div>
-  <CardGroup >
+  <CardGroup className='center'>
   {CardsJson.map((cur,pos,arr) => {
     return <DisplayCard key = {pos}  data = {cur}/>
   })}

@@ -1,4 +1,4 @@
-[
+const CampaignJson = [
   {
     "id": "CN201701182",
     "campaignName": "Camp"
@@ -40,3 +40,5 @@
     "campaignName": "abc6"
   }
 ]
+
+module.exports = CampaignJson;

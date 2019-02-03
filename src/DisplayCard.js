@@ -4,7 +4,7 @@ import {   Card, CardImg, CardText, CardBody,
 
   const divStyle = {
     margin: '40px',
-    width:'200px'
+    width:'250px'
   };
 
     export default class DisplayCard extends React.Component {
@@ -33,8 +33,8 @@ console.log(cardTitle)
        <CardImg className="card-img-top"  src={primaryMediaUrl} alt="Card image cap" />
        <CardBody>
          <CardTitle>{cardTitle}</CardTitle>
-         <CardSubtitle>{cardTitle}</CardSubtitle>
-         <CardText>{cardDescription}</CardText>
+         {/*}<CardSubtitle>{cardTitle}</CardSubtitle>*/}
+         <CardText>{cardTitle}</CardText>
          <Button>Button</Button>
        </CardBody>
      </Card>
