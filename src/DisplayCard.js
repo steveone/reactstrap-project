@@ -28,7 +28,7 @@ render(props){
 
   return (
     <div>
-    <Card style={divStyle}>
+    <Card className='cardDiv'>
        <CardImg className="card-img-top"  src={primaryMediaUrl} alt="Card image cap" />
        <CardBody>
          <CardTitle>{cardTitle}</CardTitle>

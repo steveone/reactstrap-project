@@ -34,3 +34,18 @@
 .center {
   justify-content: center;
 }
+
+
+@media screen and (min-width: 0px){
+  .card {
+    width: 80%;
+    margin: 40px;
+  }
+}
+
+@media screen and (min-width: 660px) {
+  .card {
+    width: 250px;
+    margin: 40px;
+  }
+}
