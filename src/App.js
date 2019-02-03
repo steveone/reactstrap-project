@@ -11,11 +11,24 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, faTwitter)
 
 class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        currentCampaignName: 'All Campaigns',
+        campaignId: 0
+      };
+      this.handleCampaignChange = this.handleCampaignChange.bind(this);
+}
+
+  handleCampaignChange(currentCampaignName,campaignId){
+      this.setState({ currentCampaignName,campaignId });
+   }
+
   render() {
     return (
       <div className="App">
-        <MyNav/>
-        <MyCard/>
+        <MyNav changeCampaign={this.handleCampaignChange}/>
+        <MyCard campaignId={this.state.campaignId}/>
       </div>
     );
   }

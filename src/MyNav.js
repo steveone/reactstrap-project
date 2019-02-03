@@ -41,10 +41,11 @@ import {  Collapse,
         });
       }
 
-      changeCampaign(currentCampaignName){
+      changeCampaign(currentCampaignName,campaignId){
         this.setState({
           currentCampaignName
         })
+        this.props.changeCampaign(currentCampaignName,campaignId);
       }
 
 
@@ -62,7 +63,7 @@ render(){
     <div>
         <Navbar color="light" light expand="md">
         <Nav className="ml-auto" navbar>
-        <Dropdown  nav inNavBar isOpen={this.state.isOpenNavDropDown} toggle={this.toggleNavDropDown}>
+        <Dropdown  nav isOpen={this.state.isOpenNavDropDown} toggle={this.toggleNavDropDown}>
         <DropdownToggle nav caret>
           {this.state.currentCampaignName}
         </DropdownToggle>
@@ -72,7 +73,8 @@ render(){
         {/*Loop through all campaigns to build the drop down list */}
         {CampaignJson.map((cur,pos,arr) => {
           return   <DropdownItem key={pos} id={cur['id']}
-                    onClick={()=>{this.changeCampaign(cur['campaignName'])}}>
+                    onClick={()=>{
+                      this.changeCampaign(cur['campaignName'],cur['id'])}}>
                     {cur['campaignName']}
                    </DropdownItem>
 

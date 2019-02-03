@@ -25,7 +25,6 @@ render(props){
   const data = this.props.data
 //  console.log(this.props.data);
   let {campaignId, description,cardTitle, cardDescription,primaryMediaUrl,cardStartDate,cardEndDate,currentWorkFlow,likes, open} = data;
-console.log(cardTitle)
 
   return (
     <div>
