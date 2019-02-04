@@ -56,3 +56,13 @@
 .defaultNavColor {
   color:lightgray;
 }
+
+.navWidth {
+  padding-right:10%;
+  padding-left:10%;
+}
+
+.navPadding {
+  padding-right:5px;
+  padding-left:5px;
+}

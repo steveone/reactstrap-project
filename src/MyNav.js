@@ -76,9 +76,9 @@ render(){
 
   return (
     <div>
-        <Navbar color="light" light expand="md">
+        <Navbar color="light" light expand="md" className='navWidth'>
         <Nav className="ml-auto" navbar>
-        <Dropdown  nav isOpen={this.state.isOpenNavDropDown} toggle={this.toggleNavDropDown}>
+        <Dropdown className="px-3" nav isOpen={this.state.isOpenNavDropDown} toggle={this.toggleNavDropDown}>
         <DropdownToggle nav caret>
           {this.state.currentCampaignName}
         </DropdownToggle>
@@ -92,12 +92,15 @@ render(){
                       this.changeCampaign(cur['campaignName'],cur['id'])}}>
                     {cur['campaignName']}
                    </DropdownItem>
-
         })}
         </DropdownMenu>
       </Dropdown>
-      <FontAwesomeIcon color={iconColor} icon="list-ul" className='align-self-center' size="lg" fixedWidth/>
+      <NavItem className='align-self-center navPadding'>
+      <FontAwesomeIcon color={iconColor} icon="list-ul"  size="lg" fixedWidth/>
+      </NavItem>
+      <NavItem className='align-self-center navPadding'>
       <div className='defaultNavColor align-self-center'>Pending</div>
+      </NavItem>
         </Nav>
           <NavbarToggler onClick={this.toggleNavBar} />
           <Collapse isOpen={this.state.isOpenNavBar} navbar>
@@ -105,17 +108,21 @@ render(){
             <NavItem className='align-self-center'>
             <FontAwesomeIcon color={iconColor} icon="search" size="lg" fixedWidth/>
             </NavItem>
-            <NavItem className='align-self-center'>
-            <FontAwesomeIcon color={iconColor} icon="angle-left" size="md" fixedWidth/>
-            <FontAwesomeIcon color={iconColor} icon="calendar" size="md" fixedWidth/>
-            <Moment calendar={calendarStrings} className='defaultNavColor'>
-            {this.state.startDate}
-            </Moment>
-            <FontAwesomeIcon color={iconColor} icon="angle-right" size="md`" fixedWidth/>
-            </NavItem>
-                <NavItem className='align-self-center'>
-                <Badge color="secondary" pill>1d</Badge>
+            <NavItem className='px-3 align-self-center navPadding'>
+              <FontAwesomeIcon color={iconColor} icon="angle-left" size="md" fixedWidth/>
               </NavItem>
+              <NavItem className='navPadding'>
+              <FontAwesomeIcon color={iconColor} icon="calendar" size="md" fixedWidth/>
+              <Moment calendar={calendarStrings} className=' defaultNavColor'>
+              {this.state.startDate}
+              </Moment>
+              </NavItem>
+              <NavItem className='navPadding'>
+              <FontAwesomeIcon color={iconColor} icon="angle-right" size="md`" fixedWidth/>
+            </NavItem>
+            <NavItem className='px-3 align-self-center'>
+                <Badge color="secondary" pill>1d</Badge>
+            </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
