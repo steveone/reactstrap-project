@@ -35,6 +35,7 @@
   justify-content: center;
 }
 
+/*added css to handle small screens*/
 
 @media screen and (min-width: 0px){
   .card {
@@ -43,9 +44,15 @@
   }
 }
 
+/*added css to handle everything but small screens */
+
 @media screen and (min-width: 660px) {
   .card {
     width: 250px;
     margin: 40px;
   }
+}
+
+.defaultNavColor {
+  color:lightgray;
 }

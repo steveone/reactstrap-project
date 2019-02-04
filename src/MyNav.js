@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CampaignJson from './json/campaigns';
-
+import Moment from 'react-moment';
 
 import {  Collapse,
     Navbar,
@@ -27,7 +27,9 @@ import {  Collapse,
         this.state = {
           isOpenNavBar: false,
           isOpenNavDropDown: false,
-          currentCampaignName: 'All Campaigns'
+          currentCampaignName: 'All Campaigns',
+          startDate: new Date()
+
         };
       }
       toggleNavBar() {
@@ -40,6 +42,12 @@ import {  Collapse,
           isOpenNavDropDown: !this.state.isOpenNavDropDown
         });
       }
+/*
+      handleDateChange(date) {
+        this.setState({
+          startDate: date
+        });
+      }*/
 
       changeCampaign(currentCampaignName,campaignId){
         this.setState({
@@ -50,7 +58,14 @@ import {  Collapse,
 
 
 render(){
+  const iconColor = "lightgray";
 
+  const calendarStrings = {
+      lastDay : '[Yesterday] MMM DD',
+      sameDay : '[Today] MMM DD',
+      nextDay : '[Tomorrow] MMM DD',
+      sameElse : 'MMM DD'
+  };
   //determine if All Campaigns should be in the drop down list or not
   let allCampaigns = (this.state.currentCampaignName !== 'All Campaigns') ?
   <DropdownItem key={-1} id={null}
@@ -81,23 +96,25 @@ render(){
         })}
         </DropdownMenu>
       </Dropdown>
-      <FontAwesomeIcon icon="list-ul" size="lg" fixedWidth/>
-
+      <FontAwesomeIcon color={iconColor} icon="list-ul" className='align-self-center' size="lg" fixedWidth/>
+      <div className='defaultNavColor align-self-center'>Pending</div>
         </Nav>
           <NavbarToggler onClick={this.toggleNavBar} />
           <Collapse isOpen={this.state.isOpenNavBar} navbar>
             <Nav className="ml-auto" navbar>
-            <NavItem>
-            <FontAwesomeIcon icon="search" size="lg" fixedWidth/>
+            <NavItem className='align-self-center'>
+            <FontAwesomeIcon color={iconColor} icon="search" size="lg" fixedWidth/>
             </NavItem>
-            <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-              <NavItem>
-              <Badge color="secondary" pill>1d</Badge>
+            <NavItem className='align-self-center'>
+            <FontAwesomeIcon color={iconColor} icon="angle-left" size="md" fixedWidth/>
+            <FontAwesomeIcon color={iconColor} icon="calendar" size="md" fixedWidth/>
+            <Moment calendar={calendarStrings} className='defaultNavColor'>
+            {this.state.startDate}
+            </Moment>
+            <FontAwesomeIcon color={iconColor} icon="angle-right" size="md`" fixedWidth/>
+            </NavItem>
+                <NavItem className='align-self-center'>
+                <Badge color="secondary" pill>1d</Badge>
               </NavItem>
             </Nav>
           </Collapse>
