@@ -74,7 +74,7 @@ render(){
            </DropdownItem>
        : null
   return (
-    <div>
+    <div className="fixed-top">
         <Navbar color="light" light expand="md" className='navWidth'>
         <NavbarToggler onClick={this.toggleNavBar} />
         <Navbar className="d-md-none">
