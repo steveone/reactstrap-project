@@ -111,7 +111,7 @@ render(){
             <FontAwesomeIcon color={iconColor} icon="search" size="lg" fixedWidth/>
             </NavItem>
             <NavItem className='px-3 align-self-center navPadding'>
-              <FontAwesomeIcon color="darkOrange" icon="angle-left" fixedWidth/>
+              <FontAwesomeIcon className="d-none d-md-block" color="darkOrange" icon="angle-left" fixedWidth/>
               </NavItem>
               <NavItem className='navPadding'>
               <FontAwesomeIcon color="darkOrange" icon="calendar" fixedWidth/>
@@ -120,7 +120,7 @@ render(){
               </Moment>
               </NavItem>
               <NavItem className='navPadding'>
-              <FontAwesomeIcon color="darkOrange" icon="angle-right" fixedWidth/>
+              <FontAwesomeIcon className="d-none d-md-block"  color="darkOrange" icon="angle-right" fixedWidth/>
             </NavItem>
             <NavItem className='px-3 align-self-center'>
                 <Badge color="danger" pill>1d</Badge>

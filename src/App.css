@@ -42,6 +42,11 @@
     width: 85%;
     margin: 40px;
   }
+ .nav-item{
+   width:100%;
+   align-content:center;
+ }
+
 }
 
 /*added css to handle everything but small screens */
@@ -50,6 +55,10 @@
   .card {
     width: 350px;
     margin: 20px;
+  }
+  .nav-item{
+    align-content:center;
+    width:auto;
   }
 }
 
