@@ -8,7 +8,6 @@ import {  Collapse,
     NavbarToggler,
     Nav,
     NavItem,
-    NavLink,
     Dropdown,
     DropdownToggle,
     DropdownMenu,
@@ -68,16 +67,21 @@ render(){
   };
   //determine if All Campaigns should be in the drop down list or not
   let allCampaigns = (this.state.currentCampaignName !== 'All Campaigns') ?
+
   <DropdownItem key={-1} id={null}
             onClick={()=>{this.changeCampaign('All Campaigns')}}>
             {'All Camapaigns'}
            </DropdownItem>
        : null
-
   return (
     <div>
         <Navbar color="light" light expand="md" className='navWidth'>
-        <Nav className="ml-auto" navbar>
+        <NavbarToggler onClick={this.toggleNavBar} />
+        <Navbar className="d-md-none">
+          {this.state.currentCampaignName}
+        </Navbar>
+        <Collapse isOpen={this.state.isOpenNavBar} navbar>
+        <Nav className="mr-auto" navbar>
         <Dropdown className="px-3" nav isOpen={this.state.isOpenNavDropDown} toggle={this.toggleNavDropDown}>
         <DropdownToggle nav caret>
           {this.state.currentCampaignName}
@@ -101,34 +105,29 @@ render(){
       <NavItem className='align-self-center navPadding'>
       <div className='defaultNavColor align-self-center'>Pending</div>
       </NavItem>
-        </Nav>
-          <NavbarToggler onClick={this.toggleNavBar} />
-          <Collapse isOpen={this.state.isOpenNavBar} navbar>
-            <Nav className="ml-auto" navbar>
-            <NavItem className='align-self-center'>
+      </Nav>
+      <Nav>
+      <NavItem className='align-self-center'>
             <FontAwesomeIcon color={iconColor} icon="search" size="lg" fixedWidth/>
             </NavItem>
             <NavItem className='px-3 align-self-center navPadding'>
-              <FontAwesomeIcon color={iconColor} icon="angle-left" size="md" fixedWidth/>
+              <FontAwesomeIcon color="darkOrange" icon="angle-left" fixedWidth/>
               </NavItem>
               <NavItem className='navPadding'>
-              <FontAwesomeIcon color={iconColor} icon="calendar" size="md" fixedWidth/>
-              <Moment calendar={calendarStrings} className=' defaultNavColor'>
+              <FontAwesomeIcon color="darkOrange" icon="calendar" fixedWidth/>
+              <Moment calendar={calendarStrings} className='navCalendarColor'>
               {this.state.startDate}
               </Moment>
               </NavItem>
               <NavItem className='navPadding'>
-              <FontAwesomeIcon color={iconColor} icon="angle-right" size="md`" fixedWidth/>
+              <FontAwesomeIcon color="darkOrange" icon="angle-right" fixedWidth/>
             </NavItem>
             <NavItem className='px-3 align-self-center'>
-                <Badge color="secondary" pill>1d</Badge>
+                <Badge color="danger" pill>1d</Badge>
             </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
-{/*
-        <Button color="danger" size="large">Danger!</Button>
-*/}
         </div>
 
   );

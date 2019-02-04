@@ -39,7 +39,7 @@
 
 @media screen and (min-width: 0px){
   .card {
-    width: 80%;
+    width: 85%;
     margin: 40px;
   }
 }
@@ -48,13 +48,17 @@
 
 @media screen and (min-width: 660px) {
   .card {
-    width: 250px;
-    margin: 40px;
+    width: 350px;
+    margin: 20px;
   }
 }
 
 .defaultNavColor {
   color:lightgray;
+}
+
+.navCalendarColor {
+  color: darkorange;
 }
 
 .navWidth {
