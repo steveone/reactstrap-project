@@ -79,3 +79,11 @@
   padding-right:5px;
   padding-left:5px;
 }
+
+.spinner {
+  width:40px;
+  margin-left:45%;
+  margin-right:45%;
+  margin-top:20%;
+  border:none;
+}

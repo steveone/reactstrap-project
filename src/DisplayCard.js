@@ -42,7 +42,7 @@ render(props){
         <div className="col">
           {currencySymbol} {amount} / Month
          </div>
-         <div className="col small" style={{textTransform: 'capitalize'}}>
+         <div className="col" style={{textTransform: 'capitalize'}}>
           {currentWorkflow}
         </div>
         </div>
