@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Card, Spinner, CardGroup } from 'reactstrap';
 import DisplayCard from './DisplayCard';
-//import CardsJson from './json/cards';
+//import CardsJson from '../json/cards';
 
 export default class MyCard extends React.Component {
 

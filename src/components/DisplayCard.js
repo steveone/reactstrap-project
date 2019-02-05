@@ -6,6 +6,7 @@ import {
   CardTitle,
   CardFooter,
   Progress,
+  Button
   } from 'reactstrap';
   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -28,7 +29,7 @@ render(props){
   const data = this.props.data
   let {currentWorkflow,listOfPlans, subscribers, views, totalRevenue, cardTitle, primaryMediaUrl} = data;
   let plan = listOfPlans[0]['price'];
-  console.log(plan);
+//  console.log(plan);
   let {amount,currencySymbol} = plan;
   const iconColor = "lightgray";
   return (
@@ -37,18 +38,24 @@ render(props){
        <CardImg className="card-img-top"  src={primaryMediaUrl} alt="Card image cap" />
        <CardBody>
          <CardTitle>{cardTitle}</CardTitle>
-        <CardBody className="container-fluid" align-self-center>
+        <CardBody className="container-fluid">
         <div className="row small">
         <div className="col">
           {currencySymbol} {amount} / Month
          </div>
-         <div className="col" style={{textTransform: 'capitalize'}}>
-          {currentWorkflow}
+         <div className="col" style={{top:'-5px'}} size="sm">
+           <Button
+              color={iconColor}
+              style={{'fontSize': '1em',textTransform: 'capitalize'}}
+              onClick={() => "console.log('you clicked me')"}
+              >
+            {currentWorkflow}
+           </Button>
         </div>
         </div>
          <Progress value="100" />
          </CardBody>
-         <CardFooter align-self-center  color="lightgray" className="container-fluid">
+         <CardFooter color="lightgray" className="container-fluid">
          <div className="row">
           <div className="col">
           <FontAwesomeIcon icon="database" color={iconColor}/> {totalRevenue}

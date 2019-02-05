@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import MyNav from './MyNav';
-import MyCard from './Cards';
+import MyNav from './components/MyNav';
+import MyCard from './components/Cards';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'

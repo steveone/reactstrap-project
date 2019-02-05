@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import CampaignJson from './json/campaigns';
+//import CampaignJson from '../json/campaigns';
 import Moment from 'react-moment';
 
 import {  Collapse,
@@ -27,8 +27,8 @@ import {  Collapse,
           isOpenNavBar: false,
           isOpenNavDropDown: false,
           currentCampaignName: 'All Campaigns',
-          startDate: new Date()
-
+          startDate: new Date(),
+          campaigns: null
         };
       }
       toggleNavBar() {
@@ -41,12 +41,12 @@ import {  Collapse,
           isOpenNavDropDown: !this.state.isOpenNavDropDown
         });
       }
-/*
-      handleDateChange(date) {
-        this.setState({
-          startDate: date
-        });
-      }*/
+
+      componentDidMount() {
+        fetch('http://localhost:8080/campaigns/')
+          .then(response => response.json())
+          .then(campaigns => this.setState({ campaigns }));
+      }
 
       changeCampaign(currentCampaignName,campaignId){
         this.setState({
@@ -58,7 +58,7 @@ import {  Collapse,
 
 render(){
   const iconColor = "lightgray";
-
+  let campaigns = this.state.campaigns;
   const calendarStrings = {
       lastDay : '[Yesterday] MMM DD',
       sameDay : '[Today] MMM DD',
@@ -90,7 +90,7 @@ render(){
         {/*Display All Campaigns in drop down list if appropriate.*/}
         {allCampaigns}
         {/*Loop through all campaigns to build the drop down list */}
-        {CampaignJson.map((cur,pos,arr) => {
+        {(campaigns == null) || campaigns.map((cur,pos,arr) => {
           return   <DropdownItem key={pos} id={cur['id']}
                     onClick={()=>{
                       this.changeCampaign(cur['campaignName'],cur['id'])}}>
