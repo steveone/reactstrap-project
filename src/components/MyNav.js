@@ -90,7 +90,11 @@ render(){
         {/*Display All Campaigns in drop down list if appropriate.*/}
         {allCampaigns}
         {/*Loop through all campaigns to build the drop down list */}
-        {(campaigns == null) || campaigns.map((cur,pos,arr) => {
+        {(campaigns == null) ?
+            <DropdownItem key="loading">
+              loading
+            </DropdownItem>
+          : campaigns.map((cur,pos,arr) => {
           return   <DropdownItem key={pos} id={cur['id']}
                     onClick={()=>{
                       this.changeCampaign(cur['campaignName'],cur['id'])}}>

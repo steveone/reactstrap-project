@@ -9,13 +9,12 @@ import {
   Button
   } from 'reactstrap';
   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-
-    export default class DisplayCard extends React.Component {
+  export default class DisplayCard extends React.Component {
     constructor(props) {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.updateStatus = this.updateStatus.bind(this);
         this.state = {
           isOpen: false
         };
@@ -25,9 +24,30 @@ import {
           isOpen: !this.state.isOpen
         });
       }
+
+      updateStatus(campaignId,title,placeholder) {
+           this.setState({ isLoading: true });
+           fetch('http://localhost:8080/cards',
+             {
+                     method: "POST", // *GET, POST, PUT, DELETE, etc.
+                     mode: "cors", // no-cors, cors, *same-origin
+                     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                     credentials: "same-origin", // include, *same-origin, omit
+                     headers: {
+                         "Content-Type": "application/json",
+                         // "Content-Type": "application/x-www-form-urlencoded",
+                     },
+                     body: JSON.stringify({campaignId,title,placeholder})// body data type must match "Content-Type" header
+              }
+           )
+             .then(response => response.json())
+             .then(cards => this.setState({ cards, isLoading: false }));
+         }
+
+
 render(props){
   const data = this.props.data
-  let {currentWorkflow,listOfPlans, subscribers, views, totalRevenue, cardTitle, primaryMediaUrl} = data;
+  let {id, campaignId,currentWorkflow,listOfPlans, subscribers, views, totalRevenue, cardTitle, primaryMediaUrl} = data;
   let plan = listOfPlans[0]['price'];
 //  console.log(plan);
   let {amount,currencySymbol} = plan;
@@ -43,11 +63,17 @@ render(props){
         <div className="col">
           {currencySymbol} {amount} / Month
          </div>
-         <div className="col" style={{top:'-5px'}} size="sm">
+         <div className="col"style={{top:'-5px'}} size="sm" >
+         {/*using tital for Click ID since it is unique and id isn't*/}
            <Button
+              key={id}
               color={iconColor}
               style={{'fontSize': '1em',textTransform: 'capitalize'}}
-              onClick={() => "console.log('you clicked me')"}
+              onClick={() => {
+                this.updateStatus(campaignId,cardTitle,'temp')
+                ;
+                console.log('you clicked me ' + cardTitle )}
+              }
               >
             {currentWorkflow}
            </Button>
