@@ -7,12 +7,31 @@ export default class MyCard extends React.Component {
 
   constructor(props) {
       super(props);
+      this.updateStatus = this.updateStatus.bind(this);
       this.state = {
         cards: null,
         isLoading: true
       };
 }
 
+updateStatus(campaignId,title,placeholder) {
+     this.setState({ isLoading: true });
+     fetch('http://localhost:8080/cards',
+       {
+               method: "POST", // *GET, POST, PUT, DELETE, etc.
+               mode: "cors", // no-cors, cors, *same-origin
+               cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+               credentials: "same-origin", // include, *same-origin, omit
+               headers: {
+                   "Content-Type": "application/json",
+                   // "Content-Type": "application/x-www-form-urlencoded",
+               },
+               body: JSON.stringify({campaignId,title,placeholder})// body data type must match "Content-Type" header
+        }
+     )
+       .then(response => response.json())
+       .then(cards => this.setState({ cards, isLoading: false }));
+   }
 
   componentDidMount() {
     this.setState({ isLoading: true });
@@ -44,7 +63,11 @@ render(){
     return (campaignId === 0) ? true : cur['campaignId'] === campaignId
 })
     .map((cur,pos,arr) => {
-    return <DisplayCard key = {pos}  data = {cur}/>
+    return <DisplayCard
+            key = {pos}
+            data = {cur}
+            updateStatus = {this.updateStatus}  
+             />
   })}
   </CardGroup>
         </div>

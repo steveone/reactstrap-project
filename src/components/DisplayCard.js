@@ -12,9 +12,7 @@ import {
   export default class DisplayCard extends React.Component {
     constructor(props) {
         super(props);
-
         this.toggle = this.toggle.bind(this);
-        this.updateStatus = this.updateStatus.bind(this);
         this.state = {
           isOpen: false
         };
@@ -25,24 +23,7 @@ import {
         });
       }
 
-      updateStatus(campaignId,title,placeholder) {
-           this.setState({ isLoading: true });
-           fetch('http://localhost:8080/cards',
-             {
-                     method: "POST", // *GET, POST, PUT, DELETE, etc.
-                     mode: "cors", // no-cors, cors, *same-origin
-                     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                     credentials: "same-origin", // include, *same-origin, omit
-                     headers: {
-                         "Content-Type": "application/json",
-                         // "Content-Type": "application/x-www-form-urlencoded",
-                     },
-                     body: JSON.stringify({campaignId,title,placeholder})// body data type must match "Content-Type" header
-              }
-           )
-             .then(response => response.json())
-             .then(cards => this.setState({ cards, isLoading: false }));
-         }
+
 
 
 render(props){
@@ -70,7 +51,7 @@ render(props){
               color={iconColor}
               style={{'fontSize': '1em',textTransform: 'capitalize'}}
               onClick={() => {
-                this.updateStatus(campaignId,cardTitle,'temp')
+                this.props.updateStatus(campaignId,cardTitle,'temp')
                 ;
                 console.log('you clicked me ' + cardTitle )}
               }
