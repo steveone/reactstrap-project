@@ -32,9 +32,18 @@ import {
 
 render(props){
   const data = this.props.data
-  let {id, campaignId,currentWorkflow,listOfPlans, subscribers, views, totalRevenue, cardTitle, primaryMediaUrl} = data;
+
+  const states = {
+    'saved':['Pending'],
+    '[ending':['Active','Declined'],
+    'active':['Paused','Terminated','Expired'],
+    'paused':['Active']
+}
+
+  let {campaignId,currentWorkflow,listOfPlans, subscribers, views, totalRevenue, cardTitle, primaryMediaUrl} = data;
   let plan = listOfPlans[0]['price'];
-//  console.log(plan);
+  //get this workflows possible states into it's own array
+  let futureStates = ((states[currentWorkflow] !== null)  && (states[currentWorkflow] !== undefined)) ? states[currentWorkflow] : ['empty'];
   let {amount,currencySymbol} = plan;
   const iconColor = "lightgray";
   return (
@@ -56,13 +65,16 @@ render(props){
                 {currentWorkflow}
               </DropdownToggle>
               <DropdownMenu>
+              {futureStates.map((cur) =>
               <DropdownItem
+              key = {cur + cardTitle}
               onClick={() => {
-                this.props.updateStatus(campaignId,cardTitle,'temp')
-                }
-              }
-              >Action</DropdownItem>
-              <DropdownItem>2</DropdownItem>
+                this.props.updateStatus(campaignId,cardTitle,cur)
+              }}>
+              {cur}
+              </DropdownItem>
+            )}
+          
               </DropdownMenu>
            </ButtonDropdown>
         </div>

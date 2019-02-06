@@ -14,7 +14,7 @@ export default class MyCard extends React.Component {
       };
 }
 
-updateStatus(campaignId,title,placeholder) {
+updateStatus(campaignId,title,newWorkflow) {
      this.setState({ isLoading: true });
      fetch('http://localhost:8080/cards',
        {
@@ -26,7 +26,7 @@ updateStatus(campaignId,title,placeholder) {
                    "Content-Type": "application/json",
                    // "Content-Type": "application/x-www-form-urlencoded",
                },
-               body: JSON.stringify({campaignId,title,placeholder})// body data type must match "Content-Type" header
+               body: JSON.stringify({campaignId,title,newWorkflow})// body data type must match "Content-Type" header
         }
      )
        .then(response => response.json())
@@ -66,7 +66,7 @@ render(){
     return <DisplayCard
             key = {pos}
             data = {cur}
-            updateStatus = {this.updateStatus}  
+            updateStatus = {this.updateStatus}
              />
   })}
   </CardGroup>
