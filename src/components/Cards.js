@@ -8,14 +8,69 @@ export default class MyCard extends React.Component {
   constructor(props) {
       super(props);
       this.updateStatus = this.updateStatus.bind(this);
+      this.checkForUpdateCompleted = this.checkForUpdateCompleted.bind(this);
+
       this.state = {
         cards: null,
-        isLoading: true
+        isLoading: true,
+        isUpdatePending: true,
+        pendingTitleChange: null,
+        expectedWorkflow:null,
+        tryCount:0
+
       };
 }
 
+//checks for status update complete then updates cards
+checkForUpdateCompleted() {
+   /*
+   //in theory we should limit the tries to a specific number and then
+   //notify the user it is taking too long to update.
+   //Update count limit was not implmented in this version
+   */
+   let tryCount = this.state.tryCount
+   let title = this.state.pendingTitleChange;
+   fetch(`http://localhost:8080/cards/title/${title}`)
+     .then(response => response.json())
+     .then(cardsReturned => {
+       let cards = this.state.cards;
+       if (cardsReturned[0].currentWorkflow === this.state.expectedWorkflow){
+         this.setState({
+           isUpdatePending: false,
+           pendingTitleChange: null,
+           tryCount:0,
+           expectedWorkflow:null
+         })
+         //update cards to reflect new currentWorkFlow
+         cards = cards.map((cur)=>{
+             if (cur['cardTitle'] === title) {
+               cur['currentWorkflow']=cardsReturned[0].currentWorkflow;
+               return cur;
+             }
+             return cur;
+           })
+           this.setState({cards});
+       }
+        else {
+          tryCount++;
+          this.setState({
+            tryCount
+          })
+          //try again if we didn't get the update
+          setTimeout(function() {this.checkForUpdateCompleted()}.bind(this), 1000);
+        }
+    }
+   );
+ }
+
+//used to update status for a specific card
 updateStatus(campaignId,title,newWorkflow) {
-     this.setState({ isLoading: true });
+     this.setState({
+       isUpdatePending: true,
+       pendingTitleChange: title,
+       tryCount:0,
+       expectedWorkflow:newWorkflow
+     });
      fetch('http://localhost:8080/cards',
        {
                method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -29,9 +84,20 @@ updateStatus(campaignId,title,newWorkflow) {
                body: JSON.stringify({campaignId,title,newWorkflow})// body data type must match "Content-Type" header
         }
      )
-       .then(response => response.json())
-       .then(cards => this.setState({ cards, isLoading: false }));
+//       .then(response => response.json())
+       .then(response => {
+         if (response.status === 202) {
+            //if update accepted is received from server, wait 1 second and check for update completion
+           setTimeout(function() {this.checkForUpdateCompleted()}.bind(this), 1000);
+         }
+         else {
+           //this should show on the screen to the end user vs console.log
+           console.log(`Received an unexpected reply of status code ${response.status}`);
+         }
+       })
+//       .then(cards => this.setState({ cards, isLoading: false }));
    }
+
 
   componentDidMount() {
     this.setState({ isLoading: true });
