@@ -6,20 +6,24 @@ import {
   CardTitle,
   CardFooter,
   Progress,
-  Button
+  ButtonDropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu
   } from 'reactstrap';
   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   export default class DisplayCard extends React.Component {
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
+        this.toggleButtonDropDown = this.toggleButtonDropDown.bind(this);
         this.state = {
-          isOpen: false
+          buttonDropDownOpen:false
         };
       }
-      toggle() {
+
+      toggleButtonDropDown() {
         this.setState({
-          isOpen: !this.state.isOpen
+          buttonDropDownOpen: !this.state.buttonDropDownOpen
         });
       }
 
@@ -44,20 +48,23 @@ render(props){
         <div className="col">
           {currencySymbol} {amount} / Month
          </div>
-         <div className="col"style={{top:'-5px'}} size="sm" >
+         <div className="col" style={{top:'-5px'}} size="sm" >
          {/*using tital for Click ID since it is unique and id isn't*/}
-           <Button
-              key={id}
-              color={iconColor}
-              style={{'fontSize': '1em',textTransform: 'capitalize'}}
+           <ButtonDropdown isOpen={this.state.buttonDropDownOpen} toggle={this.toggleButtonDropDown}
+              >
+              <DropdownToggle color="lightgray" style={{top:'-5px'}} size="sm">
+                {currentWorkflow}
+              </DropdownToggle>
+              <DropdownMenu>
+              <DropdownItem
               onClick={() => {
                 this.props.updateStatus(campaignId,cardTitle,'temp')
-                ;
-                console.log('you clicked me ' + cardTitle )}
+                }
               }
-              >
-            {currentWorkflow}
-           </Button>
+              >Action</DropdownItem>
+              <DropdownItem>2</DropdownItem>
+              </DropdownMenu>
+           </ButtonDropdown>
         </div>
         </div>
          <Progress value="100" />
