@@ -35,13 +35,14 @@ export default class DisplayCard extends React.Component {
   render(props) {
     const data = this.props.data;
 
+    /*workflow logic in object of arrays*/
     const states = {
       saved: ["pending"],
       pending: ["active", "declined"],
       active: ["paused", "terminated", "expired"],
       paused: ["active"],
     };
-
+    /*destructure card data*/
     let {
       campaignId,
       currentWorkflow,
@@ -89,6 +90,7 @@ export default class DisplayCard extends React.Component {
                       {currentWorkflow}
                     </DropdownToggle>
                     <DropdownMenu>
+                    {/*Loop over all workflows to create drop down with onl valid future results*/}
                       {futureStates.map(cur => (
                         <DropdownItem
                           key={cur + cardTitle}
