@@ -25,3 +25,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ## Testing
 
 This has been developed and tested on Mac OS X and works in Safari and Chrome.
+
+Testing was also done on Windows 10 with Chrome, Edge and Firefox
