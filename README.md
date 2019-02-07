@@ -52,3 +52,4 @@ Testing was also done on Windows 10 with Chrome, Edge and Firefox
 - Add visual when workflow is updating or updated
 - Offline capabilities
 - Allow cards to be opened fully (full screen)
+- Should use Context API or Redux/Thunk to limit Prop passing 
