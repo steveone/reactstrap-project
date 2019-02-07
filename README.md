@@ -2,7 +2,7 @@ This is an example of coding with React and ReactStrap (Bootstrap 4)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##To Install
+## To Install
 
 You will need to download the code with using `git clone https://github.com/steveone/reactstrap-project.git`
 
@@ -24,4 +24,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Testing
 
-This has been developed and tested on Mac OS X and works in Safari and Chrome. 
+This has been developed and tested on Mac OS X and works in Safari and Chrome.
