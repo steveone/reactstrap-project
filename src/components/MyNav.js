@@ -43,6 +43,8 @@ export default class MyNav extends React.Component {
     });
   }
 
+
+
   componentDidMount() {
     fetch("http://localhost:8080/campaigns/")
       .then(response => response.json())
@@ -50,8 +52,11 @@ export default class MyNav extends React.Component {
   }
 
   changeCampaign(currentCampaignName, campaignId) {
+    //update campaignName and auto close open navbar (for mobile)
     this.setState({
-      currentCampaignName
+      currentCampaignName,
+      isOpenNavBar: false
+
     });
     this.props.changeCampaign(currentCampaignName, campaignId);
   }
@@ -80,7 +85,7 @@ export default class MyNav extends React.Component {
       ) : null;
     return (
       <div className="fixed-top">
-        <Navbar color="light" light expand="md" className="navWidth">
+        <Navbar color="light" light expand="md" className="navWidth" >
           <NavbarToggler onClick={this.toggleNavBar} />
           <Navbar className="d-md-none">
             {this.state.currentCampaignName}
