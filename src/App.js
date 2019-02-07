@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./css/App.css";
 import MyNav from "./components/MyNav";
 import MyCard from "./components/Cards";
 
