@@ -1,0 +1,3 @@
+[submodule "reactstrap-api"]
+	path = reactstrap-api
+	url = https://github.com/steveone/reactstrap-api.git
