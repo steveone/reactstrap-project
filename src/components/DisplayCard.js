@@ -9,7 +9,8 @@ import {
   ButtonDropdown,
   DropdownItem,
   DropdownToggle,
-  DropdownMenu
+  DropdownMenu,
+  Spinner
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -51,7 +52,8 @@ export default class DisplayCard extends React.Component {
       views,
       totalRevenue,
       cardTitle,
-      primaryMediaUrl
+      primaryMediaUrl,
+      isUpdating
     } = data;
     let plan = listOfPlans[0]["price"];
     //get this workflows possible states into it's own array
@@ -87,7 +89,7 @@ export default class DisplayCard extends React.Component {
                       style={{ top: "-5px" }}
                       size="sm"
                     >
-                      {currentWorkflow}
+                      {(isUpdating === true) ? <Spinner color="primary" /> : currentWorkflow}
                     </DropdownToggle>
                     <DropdownMenu>
                     {/*Loop over all workflows to create drop down with onl valid future results*/}

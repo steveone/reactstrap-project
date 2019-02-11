@@ -44,6 +44,7 @@ export default class MyCard extends React.Component {
           cards = cards.map(cur => {
             if (cur["cardTitle"] === title) {
               cur["currentWorkflow"] = cardsReturned[0].currentWorkflow;
+              cur["isUpdating"]=false;
               return cur;
             }
             return cur;
@@ -73,6 +74,15 @@ export default class MyCard extends React.Component {
       tryCount: 0,
       expectedWorkflow: newWorkflow
     });
+    let cards = this.state.cards;
+    cards = cards.map(cur => {
+      if (cur["cardTitle"] === title) {
+        cur["isUpdating"]=true;
+        return cur;
+      }
+      return cur;
+    });
+    this.setState({ cards });
     fetch("http://localhost:8080/cards", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, cors, *same-origin
