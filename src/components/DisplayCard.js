@@ -55,7 +55,12 @@ export default class DisplayCard extends React.Component {
       primaryMediaUrl,
       isUpdating
     } = data;
+    //using the key from props allows us to have a different picture for each card
+    let key = this.props.locationKey;
     let plan = listOfPlans[0]["price"];
+    //builds string required for unique image per card using key from above
+    primaryMediaUrl = `${primaryMediaUrl}?random${key}`;
+    console.log(primaryMediaUrl);
     //get this workflows possible states into it's own array
     let futureStates =
       states[currentWorkflow] !== null && states[currentWorkflow] !== undefined

@@ -148,6 +148,7 @@ export default class MyCard extends React.Component {
                     key={pos}
                     data={cur}
                     updateWorkflow={this.updateWorkflow}
+                    locationKey={pos}
                   />
                 );
               })}
