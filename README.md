@@ -24,9 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Testing
 
-This has been developed and tested on Mac OS X and works in Safari and Chrome.
-
-Testing was also done on Windows 10 with Chrome, Edge and Firefox
+This has been developed and tested on Mac OS X and Windows 10 with Chrome, Edge, Safari and Firefox
 
 ###Features
 
@@ -40,11 +38,12 @@ Testing was also done on Windows 10 with Chrome, Edge and Firefox
 ###Things to know
 
 - To change workflow, click on workflow and select new workflow from drop download
-- Update will take five seconds to show, there is no indication the update is pending yet
+- Update will take five seconds to show, the application uses long polling to wait for the update to complete, a spinner will appear in place of the workflow while the update is pending
 - Drop down to select campaigns is functioning
 - Search, Date and Pending options have not been implemented
 - Workflow updates work through long polling, the server is polled every second until the update completes
 - The API server is set to delay the workflow update by 5 seconds
+- Each card should get a unique picture but occasionally the LoremFlickr.com website will return the same random image even though a unique random number is being passed (which should get a unique image)
 
 ###Future features
 
@@ -52,4 +51,4 @@ Testing was also done on Windows 10 with Chrome, Edge and Firefox
 - Add visual when workflow is updating or updated
 - Offline capabilities
 - Allow cards to be opened fully (full screen)
-- Should use Context API or Redux/Thunk to limit Prop passing 
+- Should use Context API or Redux/Thunk to limit Prop passing
