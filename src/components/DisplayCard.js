@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardImg,
@@ -10,41 +10,43 @@ import {
   DropdownItem,
   DropdownToggle,
   DropdownMenu,
-  Spinner
-} from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+  Spinner,
+} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class DisplayCard extends React.Component {
   constructor(props) {
     super(props);
+    const { updateWorkflow } = this.props;
     this.toggleButtonDropDown = this.toggleButtonDropDown.bind(this);
-    this.updateWorkflow = this.props.updateWorkflow.bind(this);
+    this.updateWorkflow = updateWorkflow.bind(this);
 
     this.state = {
       buttonDropDownOpen: false,
     };
   }
 
-  //this is used to handle state for the currentWorkflow button that allows workflow changes
+  // this is used to handle state for the currentWorkflow button that allows workflow changes
   toggleButtonDropDown() {
+    const { buttonDropDownOpen } = this.state;
     this.setState({
-      buttonDropDownOpen: !this.state.buttonDropDownOpen
+      buttonDropDownOpen: !buttonDropDownOpen,
     });
   }
 
 
-  render(props) {
-    const data = this.props.data;
-
-    /*workflow logic in object of arrays*/
+  render() {
+    const { data, locationKey } = this.props;
+    const { buttonDropDownOpen } = this.state;
+    /* workflow logic in object of arrays */
     const states = {
-      saved: ["pending"],
-      pending: ["active", "declined"],
-      active: ["paused", "terminated", "expired"],
-      paused: ["active"],
+      saved: ['pending'],
+      pending: ['active', 'declined'],
+      active: ['paused', 'terminated', 'expired'],
+      paused: ['active'],
     };
-    /*destructure card data*/
-    let {
+    /* destructure card data */
+    const {
       campaignId,
       currentWorkflow,
       listOfPlans,
@@ -53,27 +55,25 @@ export default class DisplayCard extends React.Component {
       totalRevenue,
       cardTitle,
       primaryMediaUrl,
-      isUpdating
+      isUpdating,
     } = data;
-    //using the key from props allows us to have a different picture for each card
-    let key = this.props.locationKey;
-    let plan = listOfPlans[0]["price"];
-    //builds string required for unique image per card using key from above
-    primaryMediaUrl = `${primaryMediaUrl}?random${key}`;
-    console.log(primaryMediaUrl);
-    //get this workflows possible states into it's own array
-    let futureStates =
-      states[currentWorkflow] !== null && states[currentWorkflow] !== undefined
-        ? states[currentWorkflow]
-        : ["empty"];
-    let { amount, currencySymbol } = plan;
-    const iconColor = "lightgray";
+    // using the key from props allows us to have a different picture for each card
+    const key = locationKey;
+    const plan = listOfPlans[0].price;
+    // builds string required for unique image per card using key from above
+    const primaryMediaUrlRandom = `${primaryMediaUrl}?random${key}`;
+    // get this workflows possible states into it's own array
+    const futureStates = states[currentWorkflow] !== null && states[currentWorkflow] !== undefined
+      ? states[currentWorkflow]
+      : ['empty'];
+    const { amount, currencySymbol } = plan;
+    const iconColor = 'lightgray';
     return (
       <div>
         <Card className="cardDiv">
           <CardImg
             className="card-img-top"
-            src={primaryMediaUrl}
+            src={primaryMediaUrlRandom}
             alt="Card image cap"
           />
           <CardBody>
@@ -81,28 +81,33 @@ export default class DisplayCard extends React.Component {
             <CardBody className="container-fluid">
               <div className="row small">
                 <div className="col">
-                  {currencySymbol} {amount} / Month
+                  {currencySymbol}
+                  {' '}
+                  {amount}
+                  {' '}
+/ Month
                 </div>
-                <div className="col" style={{ top: "-5px" }} size="sm">
-                  {/*using tital for Click ID since it is unique and id isn't*/}
+                <div className="col" style={{ top: '-5px' }} size="sm">
+                  {/* using tital for Click ID since it is unique and id isn't */}
                   <ButtonDropdown
-                    isOpen={this.state.buttonDropDownOpen}
+                    isOpen={buttonDropDownOpen}
                     toggle={this.toggleButtonDropDown}
                   >
                     <DropdownToggle
-                      color={"lightgray"}
-                      style={{ top: "-5px" }}
+                      color="lightgray"
+                      style={{ top: '-5px' }}
                       size="sm"
                     >
                       {(isUpdating === true) ? <Spinner color="primary" /> : currentWorkflow}
                     </DropdownToggle>
                     <DropdownMenu>
-                    {/*Loop over all workflows to create drop down with onl valid future results*/}
+                      {/* Loop over all workflows to create drop down with onl valid
+                        future results */}
                       {futureStates.map(cur => (
                         <DropdownItem
                           key={cur + cardTitle}
                           onClick={() => {
-                            //don't allow click if no further action can be taken
+                            // don't allow click if no further action can be taken
                             if (cur !== 'empty') {
                               this.updateWorkflow(campaignId, cardTitle, cur);
                             }
@@ -120,15 +125,19 @@ export default class DisplayCard extends React.Component {
             <CardFooter color="lightgray" className="container-fluid">
               <div className="row">
                 <div className="col">
-                  <FontAwesomeIcon icon="database" color={iconColor} />{" "}
+                  <FontAwesomeIcon icon="database" color={iconColor} />
+                  {' '}
                   {totalRevenue}
                 </div>
                 <div className="col">
-                  <FontAwesomeIcon icon="user" color={iconColor} />{" "}
+                  <FontAwesomeIcon icon="user" color={iconColor} />
+                  {' '}
                   {subscribers}
                 </div>
                 <div className="col">
-                  <FontAwesomeIcon icon="eye" color={iconColor} /> {views}
+                  <FontAwesomeIcon icon="eye" color={iconColor} />
+                  {' '}
+                  {views}
                 </div>
               </div>
             </CardFooter>
